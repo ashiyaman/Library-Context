@@ -1,7 +1,9 @@
 import { useContext, useState } from "react"
 import BookContext from "../context/BookContext"
+import { useNavigate } from "react-router-dom"
 
 const AddBookForm = () => {
+    const navigate = useNavigate()
     const {addBookHandler} = useContext(BookContext)
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
@@ -15,6 +17,7 @@ const AddBookForm = () => {
             return
         }
         addBookHandler(book)
+        navigate('/')
     }
 
     return (
@@ -26,7 +29,7 @@ const AddBookForm = () => {
             <input type='text' className='form-control' onChange={(e) => setAuthor(e.target.value)}/><br/>
             <input type='checkbox' onChange={() => setIsRead(!isRead)}/>
             <label>  Read</label><br/><br/>
-            <input type='submit' value='Add Book' />
+            <input type='submit' value='Add Book' className='btn btn-success'/>
         </form>
     )
 }

@@ -1,15 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
+import {useState} from 'react'
 
 import BookContext from './context/BookContext'
 import AddBookForm from './pages/AddBookForm'
+import Books from './pages/Books'
+import Nav from './component/Nav'
 
-function addBookHandler(book){
-  console.log('here....', book)
-}
-
-const books = [
+const bookData = [
   {
     title: 'Book 1',
     author: 'Author 1',
@@ -28,15 +27,23 @@ const books = [
   {
     title: 'Book 4',
     author: 'Author 4',
-    isRead: false
+    isRead: true
   },
 ]
 
 function App() {
+  const [books, setBooks] = useState(bookData)
+
+  function addBookHandler(book){
+    setBooks({...books}, book)
+  }
+
   return (
-    <BookContext.Provider value={{books: books, addBookHandler}}>
+    <BookContext.Provider value={{books, addBookHandler}}>
       <Router>
+        <Nav />
         <Routes>
+          <Route path='/' element={<Books />} />
           <Route path='/addBook' element={<AddBookForm />}/>
         </Routes>
       </Router>
