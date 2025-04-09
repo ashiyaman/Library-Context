@@ -12,7 +12,7 @@ const AddBookForm = () => {
     const formSubmitHandler = (e) => {
         e.preventDefault()
         console.log('..is read')
-        const book = { title, author, isRead }
+        const book = { title: title, author: author, isRead: isRead }
         if(!title || !author ){
             return
         }
